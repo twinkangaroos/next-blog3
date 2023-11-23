@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "nextblog3",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-11-23T07:21:11.514Z"
+}
