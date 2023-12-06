@@ -2,5 +2,11 @@
   "AppSyncApiName": "nextblog3",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2023-11-23T07:21:11.514Z"
+  "AuthModeLastUpdated": "2023-12-06T07:26:53.884Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authnextblog3",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
