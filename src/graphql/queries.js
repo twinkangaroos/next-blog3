@@ -39,6 +39,7 @@ export const getTodo = /* GraphQL */ `
       id
       name
       description
+      author
       createdAt
       updatedAt
       __typename
@@ -56,6 +57,7 @@ export const listTodos = /* GraphQL */ `
         id
         name
         description
+        author
         createdAt
         updatedAt
         __typename

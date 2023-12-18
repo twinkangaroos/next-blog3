@@ -27,11 +27,13 @@ export default function TodoUpdateForm(props) {
   const initialValues = {
     name: "",
     description: "",
+    author: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
+  const [author, setAuthor] = React.useState(initialValues.author);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = todoRecord
@@ -39,6 +41,7 @@ export default function TodoUpdateForm(props) {
       : initialValues;
     setName(cleanValues.name);
     setDescription(cleanValues.description);
+    setAuthor(cleanValues.author);
     setErrors({});
   };
   const [todoRecord, setTodoRecord] = React.useState(todoModelProp);
@@ -60,6 +63,7 @@ export default function TodoUpdateForm(props) {
   const validations = {
     name: [{ type: "Required" }],
     description: [],
+    author: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -89,6 +93,7 @@ export default function TodoUpdateForm(props) {
         let modelFields = {
           name,
           description: description ?? null,
+          author: author ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -151,6 +156,7 @@ export default function TodoUpdateForm(props) {
             const modelFields = {
               name: value,
               description,
+              author,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -176,6 +182,7 @@ export default function TodoUpdateForm(props) {
             const modelFields = {
               name,
               description: value,
+              author,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -189,6 +196,32 @@ export default function TodoUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
+      ></TextField>
+      <TextField
+        label="Author"
+        isRequired={false}
+        isReadOnly={false}
+        value={author}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              author: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.author ?? value;
+          }
+          if (errors.author?.hasError) {
+            runValidationTasks("author", value);
+          }
+          setAuthor(value);
+        }}
+        onBlur={() => runValidationTasks("author", author)}
+        errorMessage={errors.author?.errorMessage}
+        hasError={errors.author?.hasError}
+        {...getOverrideProps(overrides, "author")}
       ></TextField>
       <Flex
         justifyContent="space-between"

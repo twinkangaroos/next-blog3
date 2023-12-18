@@ -38,11 +38,15 @@ export const onDeletePost = /* GraphQL */ `
   }
 `;
 export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onCreateTodo(filter: $filter) {
+  subscription OnCreateTodo(
+    $filter: ModelSubscriptionTodoFilterInput
+    $author: String
+  ) {
+    onCreateTodo(filter: $filter, author: $author) {
       id
       name
       description
+      author
       createdAt
       updatedAt
       __typename
@@ -50,11 +54,15 @@ export const onCreateTodo = /* GraphQL */ `
   }
 `;
 export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onUpdateTodo(filter: $filter) {
+  subscription OnUpdateTodo(
+    $filter: ModelSubscriptionTodoFilterInput
+    $author: String
+  ) {
+    onUpdateTodo(filter: $filter, author: $author) {
       id
       name
       description
+      author
       createdAt
       updatedAt
       __typename
@@ -62,11 +70,15 @@ export const onUpdateTodo = /* GraphQL */ `
   }
 `;
 export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onDeleteTodo(filter: $filter) {
+  subscription OnDeleteTodo(
+    $filter: ModelSubscriptionTodoFilterInput
+    $author: String
+  ) {
+    onDeleteTodo(filter: $filter, author: $author) {
       id
       name
       description
+      author
       createdAt
       updatedAt
       __typename

@@ -1,11 +1,20 @@
-type Post @model @auth(rules: [{allow: public, provider: iam}]) {
+type Post @model @auth(rules: [
+  { allow: private, provider: iam }, # Login = all operations ok
+  { allow: public, provider: iam, operations: [read] }, # No login = Not writable
+]) {
   id: ID!
   title: String
   body: String
 }
 
-type Todo @model @auth(rules: [{allow: private, provider: userPools}]) {
+type Todo @model @auth(rules: [
+  #{ allow: private, provider: userPools }, # Login = all operations ok
+  { allow: owner, provider: userPools, ownerField: "author" }, # Login = own data operations ok
+  { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] } # Admin all operations ok
+  { allow: public, provider: iam, operations: [read] }, # No login = Not writable
+]) {
   id: ID!
   name: String!
   description: String
-} 
+  author: String
+}
