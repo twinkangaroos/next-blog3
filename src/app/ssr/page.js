@@ -29,7 +29,7 @@ export default async function AuthGetCurrentUserServer() {
             <>
                 {
                     posts.map(post => (
-                        <ul>
+                        <ul key={post.id}>
                             <li>{post.title}</li>
                             <li>{post.body}</li>
                             <li>{post.createdAt}</li>

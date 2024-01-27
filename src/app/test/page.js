@@ -77,7 +77,7 @@ export default function Home() {
                 } else {
                     allData = await client.graphql({
                         query: listTodos,
-                        // authMode: 'iam'
+                        authMode: 'iam'
                     })
                     // ソート: 作成日順 (createdAtが数値であることを仮定)
                     sortedData = allData.data.listTodos.items.sort((a, b) => {
@@ -139,7 +139,7 @@ export default function Home() {
                         "description": todoDescription
                     }
                 },
-                // authMode: 'iam'
+                authMode: 'iam'
             })
         }
         // データ最新化
@@ -217,9 +217,6 @@ export default function Home() {
     
 
     return (
-        <Authenticator.Provider>
-            <Authenticator>
-                {({ signOut, user }) => (
                     <>
                         <Flex direction="column">
                             <Flex direction="row" alignItems="baseline">
@@ -227,14 +224,11 @@ export default function Home() {
                                     width='30vw'
                                     level={2}
                                 >
-                                    ToDoリスト2
+                                    ToDoリスト
                                 </Heading>
-                                <h3 className='text-9xl font-bold underline text-red-500'>
-                                    TailwindCSS
-                                </h3>
                                 <Flex>
                                     {
-                                        user ? user.username : ''
+                                        
                                     }
                                 </Flex>
                                 <Flex>
@@ -355,8 +349,6 @@ export default function Home() {
                             </Table>
                         </Flex>
                     </>
-                )}
-            </Authenticator>
-        </Authenticator.Provider>
+                
     )
 }
